@@ -1,21 +1,23 @@
 #include <stdio.h>
 
-int main(){
+int BatalhaNaval(){
 
-    // Variaveis
     int tabuleiro[10][10];
-    int posicaomae = 0, posicaoaux=6;
+    int posicaomae = 0, posicaoaux=6; // variaveis do tabuleiro de batalha naval com barcos diagonais
 
-    // Preenche o tabuleiro de 0
+    // Preenche o tabuleiro e as matrizes de 0
     for (int i = 0; i < 10; i++)
     {
         for (int j = 0; j < 10; j++)
         {
             tabuleiro[i][j] = 0;
-        }
-        
+        }        
     }
-    
+
+    printf("--------------------------------------\n");
+    printf("            BATALHA NAVAL\n");
+    printf("--------------------------------------\n\n");
+
     // Cria a primeira linha de A a J
     printf("  ");
     for (int i = 0; i < 10; i++)
@@ -25,7 +27,7 @@ int main(){
     printf("\n");
 
     //Mostra tabuleiro
-    for(int i = 0; i < 10; i++){  // For responsavel por fazer em linha
+    for(int i = 0; i < 10; i++){  // For responsavel por fazer as linha
 
         ( i == 9) ? printf("%d ", 1 + i) : printf(" %d ", 1 + i); // IF responsavel por fazer a coluna de 1 a 10
         
@@ -66,5 +68,107 @@ int main(){
         }
         printf("\n");
     }
+    return 0;
+}
+
+int MatrizCone(){
+
+    int MatrizCone[10][10];
+    int MCaux1 = 200, MCaux2 = 200, MCaux3 = 200, MCParada = 0;
+
+    // Preenche o tabuleiro e as matrizes de 0
+    for (int i = 0; i < 10; i++)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            MatrizCone[i][j] = 0;
+        }        
+    }
+
+    printf("--------------------------------------\n");
+    printf("            MATRIZ EM CONE\n");
+    printf("--------------------------------------\n\n");
+
+    // Cria a primeira linha de A a J
+    printf("  ");
+    for (int i = 0; i < 10; i++)
+    {
+        printf(" %c",'A' + i);
+    }
+    printf("\n");
+
+    //Mostra tabuleiro
+    for(int i = 0; i < 10; i++){  // For responsavel por fazer as linha
+
+        ( i == 9) ? printf("%d ", 1 + i) : printf(" %d ", 1 + i); // IF responsavel por fazer a coluna de 1 a 10
+        
+        for(int j = 0; j < 10; j++){ // For responsavel por fazer as coluna 
+
+            if (j == 4 && i == 2)
+            {
+                MatrizCone[i][j] = 3;
+                printf("%d ", MatrizCone[i][j]);
+                MCaux1 = 0;
+                MCaux2 = 0;
+                MCaux3 = 0;
+                MCaux1 = j - 1;
+                MCaux2 = j + 1;
+                MCaux3 = i + 1;
+
+            }else if(j >= MCaux1 && j <= MCaux2 && i == MCaux3){
+                
+                if (MCParada == 3)
+                {
+                    MCaux1 = 0;
+                    MCaux2 = 0;
+                    MCaux3 = 0;
+                    printf("%d ", MatrizCone[i][j]);
+
+                }else if(MCaux2 == j && MCaux3 == i){
+                    MCaux1 = MCaux1 - 1;
+                    MCaux2 = j + 1;
+                    MCaux3 = i + 1;
+                    MatrizCone[i][j] = 3;
+                    printf("%d ", MatrizCone[i][j]);
+                    MCParada++;
+
+                }else{
+                    MatrizCone[i][j] = 3;
+                    printf("%d ", MatrizCone[i][j]);
+                }
+                
+
+            }else{
+                printf("%d ", MatrizCone[i][j]);
+            }
+
+        }
+        printf("\n");
+    }return 0;
+
+}
+
+int main(){
+
+    // Variaveis
+    int tabuleiro[10][10], MatrizCruz[10][10], MatrizOctaedro[10][10];
+    
+    int MCaux1 = 200, MCaux2 = 200, MCaux3 = 200, MCParada = 0;
+
+
+    // Preenche o tabuleiro e as matrizes de 0
+    for (int i = 0; i < 10; i++)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            tabuleiro[i][j] = 0;
+            MatrizCruz[i][j] = 0;
+            MatrizOctaedro[i][j] = 0;
+        }        
+    }
+
+    BatalhaNaval();
+    printf("\n");
+    MatrizCone();
 
 }
