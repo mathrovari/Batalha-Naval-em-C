@@ -252,11 +252,63 @@ int MatrizOctaedro(){
 
 }
 
+int MatrizCruz(){
+
+    int MatrizCruz[10][10];
+    int MCaux1 = 200, MCaux2 = 200, MCaux3 = 200, MCParada = 0;
+
+    // Preenche o tabuleiro e as matrizes de 0
+    for (int i = 0; i < 10; i++)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            MatrizCruz[i][j] = 0;
+        }        
+    }
+
+    printf("--------------------------------------\n");
+    printf("            MATRIZ EM CRUZ\n");
+    printf("--------------------------------------\n\n");
+
+    // Cria a primeira linha de A a J
+    printf("  ");
+    for (int i = 0; i < 10; i++)
+    {
+        printf(" %c",'A' + i);
+    }
+    printf("\n");
+
+    //Mostra tabuleiro
+    for(int i = 0; i < 10; i++){  // For responsavel por fazer as linha
+
+        ( i == 9) ? printf("%d ", 1 + i) : printf(" %d ", 1 + i); // IF responsavel por fazer a coluna de 1 a 10
+        
+        for(int j = 0; j < 10; j++){ // For responsavel por fazer as coluna 
+
+            if (j == 4 && i >= 1 && i <= 7)
+            {
+                MatrizCruz[i][j] = 3;
+                printf("%d ", MatrizCruz[i][j]);
+
+            }else if(i == 4 && j >= 1 && j <= 7){
+                MatrizCruz[i][j] = 3;
+                printf("%d ", MatrizCruz[i][j]);
+
+            }else{
+                printf("%d ", MatrizCruz[i][j]);
+            }
+
+        }
+        printf("\n");
+    }return 0;
+
+
+    return 0;
+}
+
 int main(){
 
-    // Variaveis
-    int MatrizCruz[10][10];
 
-    MatrizOctaedro();
+    MatrizCruz();
 
 }
