@@ -148,27 +148,115 @@ int MatrizCone(){
 
 }
 
-int main(){
+int MatrizOctaedro(){
 
-    // Variaveis
-    int tabuleiro[10][10], MatrizCruz[10][10], MatrizOctaedro[10][10];
-    
+    int MatrizOctaedro[10][10];
     int MCaux1 = 200, MCaux2 = 200, MCaux3 = 200, MCParada = 0;
-
 
     // Preenche o tabuleiro e as matrizes de 0
     for (int i = 0; i < 10; i++)
     {
         for (int j = 0; j < 10; j++)
         {
-            tabuleiro[i][j] = 0;
-            MatrizCruz[i][j] = 0;
             MatrizOctaedro[i][j] = 0;
         }        
     }
 
-    BatalhaNaval();
+    printf("--------------------------------------\n");
+    printf("          MATRIZ EM OCTAEDRO\n");
+    printf("--------------------------------------\n\n");
+
+    // Cria a primeira linha de A a J
+    printf("  ");
+    for (int i = 0; i < 10; i++)
+    {
+        printf(" %c",'A' + i);
+    }
     printf("\n");
-    MatrizCone();
+
+    //Mostra tabuleiro
+    for(int i = 0; i < 10; i++){  // For responsavel por fazer as linha
+
+        ( i == 9) ? printf("%d ", 1 + i) : printf(" %d ", 1 + i); // IF responsavel por fazer a coluna de 1 a 10
+        
+        for(int j = 0; j < 10; j++){ // For responsavel por fazer as coluna 
+
+            if (j == 4 && i == 1)
+            {
+                MatrizOctaedro[i][j] = 3;
+                printf("%d ", MatrizOctaedro[i][j]);
+                MCaux1 = 0;
+                MCaux2 = 0;
+                MCaux3 = 0;
+                MCaux1 = j - 1;
+                MCaux2 = j + 1;
+                MCaux3 = i + 1;
+
+            }else if(j >= MCaux1 && j <= MCaux2 && i == MCaux3){
+                
+                if (MCParada == 3)
+                {
+                    MCaux1 = 0;
+                    MCaux2 = 0;
+                    MCaux3 = 0;
+                    printf("%d ", MatrizOctaedro[i][j]);
+
+                }else if(MCaux2 == j && MCaux3 == i){
+                    MCaux1 = MCaux1 - 1;
+                    MCaux2 = j + 1;
+                    MCaux3 = i + 1;
+                    MatrizOctaedro[i][j] = 3;
+                    printf("%d ", MatrizOctaedro[i][j]);
+                    MCParada++;
+
+                }else{
+                    MatrizOctaedro[i][j] = 3;
+                    printf("%d ", MatrizOctaedro[i][j]);
+                }
+                
+
+            }else if(MCParada==3){
+                
+                if (MCaux1 == 0)
+                {
+                    MCaux1 = 1;
+                    MCaux2 = 7;
+                    MCaux3 = i +1;
+                    MatrizOctaedro[i][j] = 0; // validador de local
+                    printf("%d ", MatrizOctaedro[i][j]);
+
+                }else if( j >= MCaux1 && j <= MCaux2){
+                    
+                    
+                    MatrizOctaedro[i][j] = 3;
+                    printf("%d ", MatrizOctaedro[i][j]);
+
+                }else if(MCaux3 == i){
+                    MCaux1 = MCaux1 + 1;
+                    MCaux2 = MCaux2 - 1;
+                    MCaux3 = i + 1;
+                    printf("%d ", MatrizOctaedro[i][j]);
+
+                }else{
+                    // MatrizOctaedro[i][j] = 1; // testador de local
+                    printf("%d ", MatrizOctaedro[i][j]);
+                }
+
+            }else{
+                printf("%d ", MatrizOctaedro[i][j]);
+            }
+
+        }
+        printf("\n");
+    }return 0;
+
+}
+
+int main(){
+
+    // Variaveis
+    int MatrizCruz[10][10];
+
+    MatrizOctaedro();
 
 }
